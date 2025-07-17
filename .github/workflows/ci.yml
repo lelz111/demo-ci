@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -23,7 +24,6 @@ jobs:
       - name: Run NPM Audit (Dependency Scan)
         run: npm audit --audit-level=high
 
-      - name: Run GitLeaks scan (Stable Action)
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          scan-dir: .
+      - name: Run GitLeaks via npx (No Docker, No License)
+        run: npx gitleaks detect --no-git --redact
+
