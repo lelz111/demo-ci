@@ -5,12 +5,13 @@ on: [push]
 jobs:
  build:
   runs-on: ubuntu-latest
-  steps: 
+
+  steps:
    - uses: actions/checkout@v3
 
    - name: Setup Node.js
     uses: actions/setup-node@v3
-    with: 
+    with:
       node-version: '18'
 
    - name: Install dependecies
@@ -18,7 +19,7 @@ jobs:
 
    - name: Run Unit Tests
     run: npm test
-   
+
    - name: Run NPM Audit (Dependency Scan)
     run: npm audit --audit-level:high
 
