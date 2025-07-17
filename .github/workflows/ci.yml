@@ -26,4 +26,4 @@ jobs:
       - name: Run GitLeaks scan
         uses: zricethezav/gitleaks@v8.17.0
         with:
-          args: detect --source=. --no-git --redact
+          args: detect --source=. --no-git --redact --verbose --exit-code 1
