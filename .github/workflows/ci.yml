@@ -7,7 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Cek isi folder root
+        run: ls -la
+
+      - name: Cek apakah Dockerfile ada
+        run: |
+          if [ -f Dockerfile ]; then
+            echo "Dockerfile ditemukan, tapi tidak akan digunakan.";
+          else
+            echo "Tidak ada Dockerfile, lanjutkan workflow.";
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -23,12 +35,10 @@ jobs:
       - name: Run NPM Audit (Dependency Scan)
         run: npm audit --audit-level=high
 
-      - name: GitLeaks Scan (Secrets Detection)
+      - name: GitLeaks Scan (Secrets Detection via Action)
         uses: zricethezav/gitleaks-action@v1.6.0
 
-      - name: Run GitLeaks scan
+      - name: Run GitLeaks scan (Manual args)
         uses: zricethezav/gitleaks@v8.17.0
         with:
           args: detect --source=. --no-git --redact
-
-
