@@ -30,5 +30,4 @@ jobs:
           sudo mv gitleaks /usr/local/bin
 
       - name: Run Gitleaks Scan (No Git History)
-        run: gitleaks detect --source=. --no-git --redact
-
+        run: gitleaks detect --source=. --no-git --redact --report-format=json --report-path=gitleaks-report.json
